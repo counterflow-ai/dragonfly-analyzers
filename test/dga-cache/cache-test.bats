@@ -1,0 +1,43 @@
+#!/usr/bin/env bats
+
+function setup() {
+    redis-server --daemonize yes --loadmodule /usr/local/lib/redis-ml.so 3>&- &
+    redis-cli flushall 3>&- &
+    cat /dev/null > /var/log/dragonfly-mle/dragonfly-cache-test.log
+    cat /dev/null > /var/log/dragonfly-mle/debug.log
+    cat /dev/null > /var/log/dragonfly-mle/dragonfly-mle.log
+}
+
+# function teardown() {
+#     redis-cli shutdown
+# }
+
+@test "Test DGA Cache" {
+    skip "Due to the DNS and Alerts being handled by the MLE in different queues, this test can fail intermittendly if the alerts win the race."
+    # Copy Test Files Into Position
+    cp analyzer/dga-lr-mle.lua /usr/local/dragonfly-mle/analyzer/.
+    cp analyzer/alert-dns-cache.lua /usr/local/dragonfly-mle/analyzer/.
+    cp analyzer/write-to-log.lua /usr/local/dragonfly-mle/analyzer/.
+    cp test/dga-cache/cache-test-config.lua /usr/local/dragonfly-mle/config/config.lua
+    cp test/dga-cache/cache-test-filter.lua /usr/local/dragonfly-mle/filter/.
+    cp test/dga-cache/cache-test-data.json /usr/local/mle-data/.
+
+    # Fire Up Dragonfly
+    cd /usr/local/dragonfly-mle
+    ./bin/dragonfly-mle 3>&- &
+    dragonfly_pid=$!
+    echo "# $dragonfly_pid"
+
+    sleep 5  
+
+    #Shutdown Dragonfly
+    run pkill -P $dragonfly_pid
+    [ "$status" -eq 0 ]
+    run kill -9 $dragonfly_pid
+    [ "$status" -eq 0 ]
+
+    # Validate Output
+    run bash -c "cat /var/log/dragonfly-mle/dragonfly-cache-test.log | grep '\"event_type\":\"alert\"' | tail -n 1 | jq -r 'if .analytics.dga then .analytics.dga|@text else empty end'"
+    [ "$status" -eq 0 ]
+    [ "$output" = "{\"domain\":\"client.dropbox-dns.com\",\"score\":0.49448459163219}" ]
+} 
