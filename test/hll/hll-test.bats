@@ -13,13 +13,13 @@ function teardown() {
 
 @test "Test HLL Example" {
     # Copy Test Files Into Position
-    cp analyzer/ip-utils.lua /usr/local/dragonfly-mle/analyzer/.
-    cp analyzer/utils.lua /usr/local/dragonfly-mle/analyzer/.
-    cp analyzer/write-to-log.lua /usr/local/dragonfly-mle/analyzer/.
-    cp analyzer/connection-count-hll.lua /usr/local/dragonfly-mle/analyzer/.
+    cp ip-util/ip-utils.lua /usr/local/dragonfly-mle/analyzer/.
+    cp util/utils.lua /usr/local/dragonfly-mle/analyzer/.
+    cp util/write-to-log.lua /usr/local/dragonfly-mle/analyzer/.
+    cp top-talkers/connection-count-hll.lua /usr/local/dragonfly-mle/analyzer/.
 
     cp test/hll/hll-test-config.lua /usr/local/dragonfly-mle/config/config.lua
-    cp analyzer/internal-ip.lua /usr/local/dragonfly-mle/filter/.
+    cp ip-util/internal-ip.lua /usr/local/dragonfly-mle/filter/.
     cp test/hll/hll-test-data.json /usr/local/mle-data/.
 
     # Fire Up Dragonfly

@@ -13,8 +13,8 @@ function teardown() {
 
 @test "Test Time Anomaly" {
     # Copy Test Files Into Position
-    cp analyzer/time-anomaly.lua /usr/local/dragonfly-mle/analyzer/.
-    cp analyzer/write-to-log.lua /usr/local/dragonfly-mle/analyzer/.
+    cp anomaly/time-anomaly.lua /usr/local/dragonfly-mle/analyzer/.
+    cp util/write-to-log.lua /usr/local/dragonfly-mle/analyzer/.
     cp test/time-anomaly/time-test-config.lua /usr/local/dragonfly-mle/config/config.lua
     cp test/time-anomaly/time-test-filter.lua /usr/local/dragonfly-mle/filter/.
     cp test/time-anomaly/time-test-data.json /usr/local/mle-data/.

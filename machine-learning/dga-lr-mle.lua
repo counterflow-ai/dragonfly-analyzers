@@ -29,181 +29,231 @@
 -- This analyzer demonstrates the Redis-ML Logistic Regression model
 -- ----------------------------------------------
 
+require 'analyzer/utils'
 local dt = require('analyzer/feature') -- contains data transformation helper functions
 
 -- ----------------------------------------------
 -- Transform takes a domain and converts it to the format needed for Redis-ML
 -- ----------------------------------------------
 function transform(input)
-	lowerdomain = input
-	splits = csplit(lowerdomain, "%.")
-	splitdomain = splits.parts
-	numparts = splits.num
+    lowerdomain = input
+    splits = csplit(lowerdomain, "%.")
+    splitdomain = splits.parts
+    numparts = splits.num
 
-	parts = parse(splitdomain, numparts)
+    parts = parse(splitdomain, numparts)
 
-	newrow = {}
-	newrow[1] = numparts  -- Number of domain parts
-	newrow[2] = string.len(parts.tld) --Length of tld
-	newrow[3] = string.len(parts.second) --Length of 2LD
+    newrow = {}
+    newrow[1] = numparts  -- Number of domain parts
+    newrow[2] = string.len(parts.tld) --Length of tld
+    newrow[3] = string.len(parts.second) --Length of 2LD
 
-	if newrow[2] == 0 then
-		print (input)
-	end
+    --[[
+    if newrow[2] == 0 then
+        print (input)
+    end
+    ]]--
 
-	newrow[4] = string.len(parts.third) --Length of 3LD
+    newrow[4] = string.len(parts.third) --Length of 3LD
 
-	if string.len(parts.third) > 0 then -- Has a 3LD
-		newrow[5] = 1
-	else
-		newrow[5] = 0
-	end
+    if string.len(parts.third) > 0 then -- Has a 3LD
+        newrow[5] = 1
+    else
+        newrow[5] = 0
+    end
 
-	if (numparts > 3 and string.len(parts.tld) <= 3) or numparts > 4  then --Has more than 3LD
-		newrow[6] = 1
-	else
-		newrow[6] = 0
-	end
+    if (numparts > 3 and string.len(parts.tld) <= 3) or numparts > 4  then --Has more than 3LD
+        newrow[6] = 1
+    else
+        newrow[6] = 0
+    end
 
-	if string.len(parts.tld) < 3 then --Is just a country code
-		newrow[7] = 1
-	else
-		newrow[7] = 0
-	end
+    if string.len(parts.tld) < 3 then --Is just a country code
+        newrow[7] = 1
+    else
+        newrow[7] = 0
+    end
 
-	if string.find(lowerdomain, ".edu", 1, true) then --Is this .edu
-		newrow[8] = 1
-	else
-		newrow[8] = 0
-	end
+    if string.find(lowerdomain, ".edu", 1, true) then --Is this .edu
+        newrow[8] = 1
+    else
+        newrow[8] = 0
+    end
 
-	if string.find(lowerdomain, ".gov", 1, true) or string.find(lowerdomain, ".govt", 1, true) or string.find(lowerdomain, ".gouv", 1, true) then --Is this .gov
-		newrow[9] = 1
-	else
-		newrow[9] = 0
-	end
+    if string.find(lowerdomain, ".gov", 1, true) or string.find(lowerdomain, ".govt", 1, true) or string.find(lowerdomain, ".gouv", 1, true) then --Is this .gov
+        newrow[9] = 1
+    else
+        newrow[9] = 0
+    end
 
-	if parts.tld == "com" then --Is this .com
-		newrow[10] = 1
-	else
-		newrow[10] = 0
-	end
+    if parts.tld == "com" then --Is this .com
+        newrow[10] = 1
+    else
+        newrow[10] = 0
+    end
 
-	if parts.tld == "net" then --Is this .net
-		newrow[11] = 1
-	else
-		newrow[11] = 0
-	end
+    if parts.tld == "net" then --Is this .net
+        newrow[11] = 1
+    else
+        newrow[11] = 0
+    end
 
-	if parts.tld == "org" then --Is this .org
-		newrow[12] = 1
-	else
-		newrow[12] = 0
-	end
+    if parts.tld == "org" then --Is this .org
+        newrow[12] = 1
+    else
+        newrow[12] = 0
+    end
 
-	if parts.tld == "info" then --Is this .info
-		newrow[13] = 1
-	else
-		newrow[13] = 0
-	end
+    if parts.tld == "info" then --Is this .info
+        newrow[13] = 1
+    else
+        newrow[13] = 0
+    end
 
-	if parts.tld == "biz" then --Is this .biz
-		newrow[14] = 1
-	else
-		newrow[14] = 0
-	end
+    if parts.tld == "biz" then --Is this .biz
+        newrow[14] = 1
+    else
+        newrow[14] = 0
+    end
 
-	-- Character Count based features
-	charCounts = countAllChars(parts.second)
-	fullCharCounts = countAllChars(lowerdomain)
-	distinctChars = charCounts.distinct
-	digitCount = (countDigits(charCounts) or 0)
-	numDashes = (countChar(charCounts, "-") or 0)
+    -- Character Count based features
+    charCounts = countAllChars(parts.second)
+    fullCharCounts = countAllChars(lowerdomain)
+    distinctChars = charCounts.distinct
+    digitCount = (countDigits(charCounts) or 0)
+    numDashes = (countChar(charCounts, "-") or 0)
 
-	-- fullCharCounts = countAllChars(lowerdomain)
-	-- distinctChars = fullCharCounts.distinct
-	-- digitCount = (countDigits(fullCharCounts) or 0)
-	-- numDashes = (countChar(fullCharCounts, "-") or 0)
+    -- fullCharCounts = countAllChars(lowerdomain)
+    -- distinctChars = fullCharCounts.distinct
+    -- digitCount = (countDigits(fullCharCounts) or 0)
+    -- numDashes = (countChar(fullCharCounts, "-") or 0)
 
-	length = 1
-	-- if string.len(lowerdomain) > 0 then
-	if string.len(parts.second) > 0 then
-		percentDistinct = (distinctChars/string.len(parts.second) or 0)
-		percentDigits = (digitCount/string.len(parts.second) or 0)
-	end
+    length = 1
+    -- if string.len(lowerdomain) > 0 then
+    if string.len(parts.second) > 0 then
+        percentDistinct = (distinctChars/string.len(parts.second) or 0)
+        percentDigits = (digitCount/string.len(parts.second) or 0)
+    end
 
-	newrow[15] = distinctChars -- Num of distinct characters
-	newrow[16] = digitCount --Num of digits
+    newrow[15] = distinctChars -- Num of distinct characters
+    newrow[16] = digitCount --Num of digits
 
-	if digitCount > 0 then --has digit
-		newrow[17] = 1
-	else
-		newrow[17] = 0
-	end
+    if digitCount > 0 then --has digit
+        newrow[17] = 1
+    else
+        newrow[17] = 0
+    end
 
 
-	newrow[18] = numDashes
+    newrow[18] = numDashes
 
-	if numDashes > 0 then --has dash
-		newrow[19] = 1
-	else
-		newrow[19] = 0
-	end
+    if numDashes > 0 then --has dash
+        newrow[19] = 1
+    else
+        newrow[19] = 0
+    end
 
-	newrow[20] = string.len(parts.last) --length of anything past 3
-	newrow[21] = (percentDistinct or 0)
-	newrow[22] = (percentDigits or 0)
+    newrow[20] = string.len(parts.last) --length of anything past 3
+    newrow[21] = (percentDistinct or 0)
+    newrow[22] = (percentDigits or 0)
 
-	newrow[23] = metricEntropy(lowerdomain, fullCharCounts)
+    newrow[23] = metricEntropy(lowerdomain, fullCharCounts)
 
-	return newrow
+    return newrow
 end
 -- ----------------------------------------------
 --
 -- ----------------------------------------------
+local analyzer_name = 'Logistic Regression DGA'
+
 function setup()
-	conn = hiredis.connect()
-    assert(conn:command("PING") == hiredis.status.PONG)
-	print (">>>>>>>> DGA (Logistic) Analyzer")
-	-- DGA Logistic Regression model
+    conn = hiredis.connect()
+    if conn:command('PING') ~= hiredis.status.PONG then
+        dragonfly.log_event(analyzer_name..': Could not connect to redis')
+        dragonfly.log_event(analyzer_name..': exiting')
+        os.exit()
+    end
+    local start = os.clock()
+    print (">>>>>>>> DGA (Logistic) Analyzer")
+    -- DGA Logistic Regression model
     reply = conn:command("ML.LOGREG.SET","dga","-2.42064408839","1.99545844518","-1.70241301806","0.00306950873423",
     "-0.15181071537","2.29227920798","-0.797475159835","-1.96870692592","-0.883096645108","-0.99507358149",
     "-0.574770439156","0.279708188326","-0.0993450421238","3.18976170491","1.35485232316","0.151034941312",
     "0.154731245945","0.618496661902","-0.17331944488","-0.251627327936","0.111298556062","-1.06460092327",
-	"-0.285532716969","-0.555498868092")
-	
-    print ("loaded ML model: ", reply)
+    "-0.285532716969","-0.555498868092")
+    
+    if type(reply) == 'table' and reply.name ~= 'OK' then
+        dragonfly.log_event('Failed to load ML Logistic Regression: '..reply.name)
+    end 
+
+    local now = os.clock()
+    local delta = now - start
+    print ('Loaded '..analyzer_name..' ML Model in '..delta..' seconds')
+    dragonfly.log_event('Loaded '..analyzer_name..' ML Model in '..delta..' seconds')
+
+    version = "0.0.1"
 end
 
 -- ----------------------------------------------
 --
 -- ----------------------------------------------
 function loop(msg)
-	local eve = cjson.decode(msg)
-	-- Note we're assuming you are using Suricata DNS logging version 2. 
-	if eve and eve.dns.type == 'answer' and eve.dns.rrname and eve.dns.answers then 
-		-- debug message below
-		-- ----------------------------------------------
-		-- DNS analysis
-		-- ----------------------------------------------
-		local features = transform(eve.dns.rrname)
-		reply = conn:command("ML.LOGREG.PREDICT", "dga", unpack(features))
-		-- print ("predict: ",reply)
+    local start = os.clock()
+    -- Note we're assuming you are using Suricata DNS logging version 1. 
+    local eve = cjson.decode(msg)
+	local fields = {'dns.rrname',
+                    'dns.rdata',
+                    ['dns.type'] = 'answer',}
+    if not check_fields(eve, fields) then
+        dragonfly.log_event(analyzer_name..': Required fields missing')
+        dragonfly.analyze_event(default_analyzer, msg)
+        return
+    end
 
-		analytics = eve.analytics
-        if not analytics then
-            analytics = {}
-		end
-		
-		dga = {}
-		dga.score = reply
-		dga.source = "dga/dga-lr-mle.lua"
+    -- ----------------------------------------------
+    -- DNS analysis
+    -- ----------------------------------------------
+    local features = transform(eve.dns.rrname)
+    local cmd = 'ML.LOGREG.PREDICT dga'
+    for _, feature_value in ipairs(features) do
+        cmd = cmd .. ' ' .. feature_value
+    end
+    local reply = conn:command_line(cmd)
+    if type(reply) == 'table' and reply.name ~= 'OK' then
+        dragonfly.log_event(analyzer_name..': '..cmd..': '..reply.name)
+        dragonfly.analyze_event(default_analyzer, msg)
+        return
+    end 
+    if not tonumber(reply) then
+        dragonfly.log_event(analyzer_name..': Could not convert tonumber reply '.. reply)
+        dragonfly.analyze_event(default_analyzer, msg)
+        return
+    end 
 
-		analytics.dga = dga
-		eve.analytics = analytics
-	
-		dragonfly.output_event ("log", cjson.encode(eve))
-	else 
-		dragonfly.output_event("log", msg)
-	end
+
+    analytics = eve.analytics
+    if not analytics then
+        analytics = {}
+    end
+    
+    dga = {}
+    dga.score = tonumber(reply)
+    dga.source = "dga/dga-lr-mle.lua"
+    dga.version = version
+
+    analytics.dga = dga
+    eve.analytics = analytics
+
+    if eve.dns.rdata then
+        local cmd = 'SETEX dga:'..eve.dns.rdata..' 60 '..dga.score..':'..eve.dns.rrname
+        local reply = conn:command_line(cmd)
+        if type(reply) == 'table' and reply.name ~= 'OK' then
+            dragonfly.log_event(analyzer_name..': '..cmd..': '..reply.name)
+        end 
+    end
+
+    dragonfly.analyze_event(default_analyzer, cjson.encode(eve))
+    local now = os.clock()
+    local delta = now - start
+    dragonfly.log_event(analyzer_name..': time: '..delta)
 end

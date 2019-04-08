@@ -13,14 +13,14 @@ function teardown() {
 
 @test "Test IP Geolocation Example" {
     # Copy Test Files Into Position
-    cp analyzer/IP2LOCATION-LITE-DB1.CSV /usr/local/dragonfly-mle/analyzer/.
-    cp analyzer/ip-utils.lua /usr/local/dragonfly-mle/analyzer/.
-    cp analyzer/utils.lua /usr/local/dragonfly-mle/analyzer/.
-    cp analyzer/ip-geolocation.lua /usr/local/dragonfly-mle/analyzer/.
-    cp analyzer/write-to-log.lua /usr/local/dragonfly-mle/analyzer/.
+    cp ip-util/IP2LOCATION-LITE-DB1.CSV /usr/local/dragonfly-mle/analyzer/.
+    cp ip-util/ip-utils.lua /usr/local/dragonfly-mle/analyzer/.
+    cp util/utils.lua /usr/local/dragonfly-mle/analyzer/.
+    cp ip-util/ip-geolocation.lua /usr/local/dragonfly-mle/analyzer/.
+    cp util/write-to-log.lua /usr/local/dragonfly-mle/analyzer/.
     cp test/ip-geolocation/geo-test-config.lua /usr/local/dragonfly-mle/config/config.lua
     cp test/ip-geolocation/geo-test-filter.lua /usr/local/dragonfly-mle/filter/.
-    cp analyzer/internal-ip.lua /usr/local/dragonfly-mle/analyzer/.
+    cp ip-util/internal-ip.lua /usr/local/dragonfly-mle/analyzer/.
     cp test/ip-geolocation/geo-test-data.json /usr/local/mle-data/.
 
     # Fire Up Dragonfly

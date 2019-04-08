@@ -14,14 +14,14 @@ function teardown() {
 
 @test "Test Country Anomaly" {
     # Copy Test Files Into Position
-    cp analyzer/IP2LOCATION-LITE-DB1.CSV /usr/local/dragonfly-mle/analyzer/.
-    cp analyzer/country-codes.txt /usr/local/dragonfly-mle/analyzer/.
-    cp analyzer/ip-utils.lua /usr/local/dragonfly-mle/analyzer/.
-    cp analyzer/internal-ip.lua /usr/local/dragonfly-mle/analyzer/.
-    cp analyzer/utils.lua /usr/local/dragonfly-mle/analyzer/.
-    cp analyzer/ip-geolocation.lua /usr/local/dragonfly-mle/analyzer/.
-    cp analyzer/write-to-log.lua /usr/local/dragonfly-mle/analyzer/.
-    cp analyzer/country-anomaly.lua /usr/local/dragonfly-mle/analyzer/.
+    cp ip-util/IP2LOCATION-LITE-DB1.CSV /usr/local/dragonfly-mle/analyzer/.
+    cp ip-util/country-codes.txt /usr/local/dragonfly-mle/analyzer/.
+    cp ip-util/ip-utils.lua /usr/local/dragonfly-mle/analyzer/.
+    cp ip-util/internal-ip.lua /usr/local/dragonfly-mle/analyzer/.
+    cp util/utils.lua /usr/local/dragonfly-mle/analyzer/.
+    cp ip-util/ip-geolocation.lua /usr/local/dragonfly-mle/analyzer/.
+    cp util/write-to-log.lua /usr/local/dragonfly-mle/analyzer/.
+    cp anomaly/country-anomaly.lua /usr/local/dragonfly-mle/analyzer/.
     cp test/country-anomaly/country-test-config.lua /usr/local/dragonfly-mle/config/config.lua
     cp test/country-anomaly/country-test-filter.lua /usr/local/dragonfly-mle/filter/.
     cp test/country-anomaly/country-test-data.json /usr/local/mle-data/.
