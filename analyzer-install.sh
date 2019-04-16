@@ -1,6 +1,6 @@
 #! /bin/bash
 
-dragonfly_root="/usr/local/dragonfly"
+dragonfly_root="/usr/local/dragonfly-mle"
 destination="analyzer"
 analyzer_dirs="ip-util util"
 dir=$1
@@ -28,4 +28,5 @@ for val in $analyzer_dirs; do
     rsync_dirs="$rsync_dirs $val/*"
 done
 
-echo "rsync -vu $rsync_dirs $dragonfly_root/$destination"
+echo "rsync -vvu $rsync_dirs $dragonfly_root/$destination"
+rsync -vvu $rsync_dirs $dragonfly_root/$destination
