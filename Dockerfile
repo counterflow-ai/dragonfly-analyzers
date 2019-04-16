@@ -43,4 +43,4 @@ RUN /etc/init.d/syslog-ng restart
 WORKDIR event-triage
 COPY . /event-triage
 RUN ls -la 
-CMD bats test/*/*.bats
+CMD bats -r test
