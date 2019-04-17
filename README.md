@@ -82,7 +82,7 @@ Note that the configuration file must be named `config.lua` or the MLE will not 
 
 Once the config files are successfully installed, restarting the MLE is necessary. For use with OPNids:
 ```
-service dragonfly-mle restart
+configctl dragonflymle restart
 ```
 for standalone usage:
 ```
