@@ -28,5 +28,9 @@ for val in $analyzer_dirs; do
     rsync_dirs="$rsync_dirs $val/*"
 done
 
-echo "rsync -vvu $rsync_dirs $dragonfly_root/$destination"
-rsync -vvu $rsync_dirs $dragonfly_root/$destination
+## If you prefer to use rsync, which is not installed by default on OPNids
+# echo "rsync -vvu $rsync_dirs $dragonfly_root/$destination"
+# rsync -vvu $rsync_dirs $dragonfly_root/$destination
+
+echo "cp -n $rsync_dirs $dragonfly_root/$destination"
+cp -nv $rsync_dirs $dragonfly_root/$destination
