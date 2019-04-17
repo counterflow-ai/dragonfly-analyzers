@@ -82,3 +82,7 @@ Note that the configuration file must be named `config.lua` or the MLE will not 
 
 Once the config files are successfully installed, restarting the MLE is necessary. If you are using OPNids, the MLE can be restarted from the GUI. (https://docs.opnids.io/manual/gui.html)
 
+## Dockerfile
+
+The included Dockerfile loads the MLE and automatically runs the tests of these analyzers.  The test directory contains many examples of using the analyzer to process network metadata events.
+
