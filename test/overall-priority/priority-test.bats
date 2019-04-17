@@ -13,12 +13,12 @@ function teardown() {
 }
 
 @test "Test Alert Triage" {
-    skip "For debug purposes only. Output depends on the analyzers included in the scores."
+    # skip "For debug purposes only. Output depends on the analyzers included in the scores."
     # Copy Test Files Into Position
     cp machine-learning/dga-lr-mle.lua /usr/local/dragonfly-mle/analyzer/.
     cp ip-util/ip-blacklist.lua /usr/local/dragonfly-mle/analyzer/.
     cp ip-util/ip-geolocation.lua /usr/local/dragonfly-mle/analyzer/.
-    cp ip-util/country-anomaly.lua /usr/local/dragonfly-mle/analyzer/.
+    cp anomaly/country-anomaly.lua /usr/local/dragonfly-mle/analyzer/.
     cp ip-util/ip-utils.lua /usr/local/dragonfly-mle/analyzer/.
     cp util/utils.lua /usr/local/dragonfly-mle/analyzer/.
     cp ip-util/internal-ip.lua /usr/local/dragonfly-mle/analyzer/.
@@ -26,7 +26,7 @@ function teardown() {
     cp event-triage/overall-priority.lua /usr/local/dragonfly-mle/analyzer/.
     cp anomaly/time-anomaly.lua /usr/local/dragonfly-mle/analyzer/.
     cp anomaly/signature-anomaly.lua /usr/local/dragonfly-mle/analyzer/.
-    cp top-talker/total-bytes-rank.lua /usr/local/dragonfly-mle/analyzer/.
+    cp top-talkers/total-bytes-rank.lua /usr/local/dragonfly-mle/analyzer/.
     cp util/write-to-log.lua /usr/local/dragonfly-mle/analyzer/.
     cp util/router-filter.lua /usr/local/dragonfly-mle/analyzer/.
     cp test/overall-priority/priority-test-config.lua /usr/local/dragonfly-mle/config/config.lua
