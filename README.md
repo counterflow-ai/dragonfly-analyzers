@@ -1,13 +1,12 @@
 # Dragonfly Analyzers
 
-These are a collection of analyzers to use with the [Dragonfly Machine Learning Engine (MLE)] (https://github.com/counterflow-ai/dragonfly-mle)on [OPNids](https://opnids.io). An analyzer processes an input event, updating the event with additional information or caching data from the event in Redis for future use. 
+These are a collection of analyzers to use with the [Dragonfly Machine Learning Engine (MLE)](https://github.com/counterflow-ai/dragonfly-mle)on [OPNids](https://opnids.io). An analyzer processes an input event, updating the event with additional information or caching data from the event in Redis for future use. 
 
 ## Usage
 
 Analyzers must be installed in the root directory of the MLE. For most installations this is `/usr/local/dragonfly-mle/analyzer`. Analyzer usage is specified in the `/usr/local/dragonfly-mle/config.lua` file.
 
 For convenience, we have included a script to install the analyzers and filters included in this repo.
-
 
 
 ### Step 1: Connect to the OPNids CLI
@@ -78,4 +77,8 @@ cd dragonfly-analyzers
 cp event-triage-config.lua /usr/local/dragonfly-mle/config/config.lua
 ```
 Note that the configuration file must be named `config.lua` or the MLE will not pick it up.
+
+### Step 7: Restart the Dragonfly MLE
+
+Once the config files are successfully installed, restarting the MLE is necessary. If you are using OPNids, the MLE can be restarted from the GUI. (https://docs.opnids.io/manual/gui.html)
 
