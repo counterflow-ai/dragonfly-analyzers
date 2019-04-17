@@ -80,7 +80,16 @@ Note that the configuration file must be named `config.lua` or the MLE will not 
 
 ### Step 7: Restart the Dragonfly MLE
 
-Once the config files are successfully installed, restarting the MLE is necessary. If you are using OPNids, the MLE can be restarted from the GUI. (https://docs.opnids.io/manual/gui.html)
+Once the config files are successfully installed, restarting the MLE is necessary. For use with OPNids:
+```
+service dragonfly-mle restart
+```
+for standalone usage:
+```
+cd /usr/local/dragonfly-mle
+./bin/dragonfly-mle
+```
+If you are using OPNids, the MLE can also be restarted from the GUI. (https://docs.opnids.io/manual/gui.html)
 
 ## Dockerfile
 
