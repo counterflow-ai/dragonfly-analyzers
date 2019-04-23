@@ -36,7 +36,7 @@ end
 --
 -- ----------------------------------------------
 function loop(msg)
-    local eve = cjson.decode(msg)
+    local eve = msg
     if eve then
         dragonfly.analyze_event(default_analyzer, msg)
     end

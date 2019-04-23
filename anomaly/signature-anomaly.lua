@@ -46,7 +46,7 @@ end
 
 function loop(msg)
     local start = os.clock()
-    local eve = cjson.decode(msg)
+    local eve = msg
 	local fields = {"alert.signature_id",}
     if not check_fields(eve, fields) then
         --dragonfly.log_event('Missing fields alert.signature_id')
@@ -111,7 +111,7 @@ function loop(msg)
     signature_info["unique_signatures"] = unique_sigs
     analytics["signature"] = signature_info
     eve['analytics'] = analytics
-    dragonfly.analyze_event(default_analyzer, cjson.encode(eve)) 
+    dragonfly.analyze_event(default_analyzer, eve) 
     local now = os.clock()
     local delta = now - start
     dragonfly.log_event(analyzer_name..': time: '..delta)

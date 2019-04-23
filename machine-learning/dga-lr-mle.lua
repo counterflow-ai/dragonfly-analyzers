@@ -200,7 +200,7 @@ end
 function loop(msg)
     local start = os.clock()
     -- Note we're assuming you are using Suricata DNS logging version 1. 
-    local eve = cjson.decode(msg)
+    local eve = msg
 	local fields = {'dns.rrname',
                     'dns.rdata',
                     ['dns.type'] = 'answer',}
@@ -252,7 +252,7 @@ function loop(msg)
         end 
     end
 
-    dragonfly.analyze_event(default_analyzer, cjson.encode(eve))
+    dragonfly.analyze_event(default_analyzer, eve)
     local now = os.clock()
     local delta = now - start
     dragonfly.log_event(analyzer_name..': time: '..delta)

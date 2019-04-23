@@ -112,7 +112,7 @@ end
 
 function loop(msg)
     local start = os.clock()
-    local eve = cjson.decode(msg)
+    local eve = msg
 	local fields = { ["event_type"] = "alert"}
     if not check_fields(eve, fields) then
         dragonfly.log_event(analyzer_name..': Required fields missing')
@@ -248,7 +248,7 @@ function loop(msg)
     priority["priority"] = max_score + (max_score *  num_over_threshold / num_analyzers) 
     priority["details"] = details
     eve["priority"] = priority
-    dragonfly.analyze_event(default_analyzer, cjson.encode(eve)) 
+    dragonfly.analyze_event(default_analyzer, eve) 
     local now = os.clock()
     local delta = now - start
     dragonfly.log_event(analyzer_name..': time: '..delta)

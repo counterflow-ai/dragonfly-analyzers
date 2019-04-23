@@ -31,7 +31,7 @@ function setup()
 end
 
 function loop(msg)
-    local eve = cjson.decode(msg)
+    local eve = msg
     if eve and eve.event_type == 'alert' then
         target = eve.dest_ip
         sid = eve.alert.signature_id
@@ -108,7 +108,7 @@ function loop(msg)
         triage["active_network_hosts"] = n
         analytics["triage"] = triage
         eve["analytics"] = analytics
-        dragonfly.analyze_event(default_analyzer, cjson.encode(eve)) 
+        dragonfly.analyze_event(default_analyzer, eve) 
     else 
         dragonfly.analyze_event("sink", msg)
     end

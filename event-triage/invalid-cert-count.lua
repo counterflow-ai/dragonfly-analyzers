@@ -35,7 +35,7 @@ function setup()
 end
 
 function loop(msg)
-    local eve = cjson.decode(msg)
+    local eve = msg
     if eve and eve.event_type == 'alert' and eve.alert.signature_id >= 2230000 and eve.alert.signature_id <= 2230020 then
         
         -- Found an invalid certificate, increment counts by IP
@@ -81,7 +81,7 @@ function loop(msg)
         invalid_cert["dest_type_count"] = dest_type_count
         analytics["invalid_cert"] = invalid_cert
         eve["analytics"] = analytics
-        dragonfly.analyze_event(default_analyzer, cjson.encode(eve)) 
+        dragonfly.analyze_event(default_analyzer, eve) 
     else 
         dragonfly.analyze_event(default_analyzer, msg)
     end

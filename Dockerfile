@@ -40,7 +40,7 @@ RUN mkdir /usr/local/mle-data
 RUN mkdir /var/log/dragonfly-mle
 RUN /etc/init.d/syslog-ng restart
 
-WORKDIR event-triage
-COPY . /event-triage
+WORKDIR dragonfly-analyzers
+COPY . /dragonfly-analyzers
 RUN ls -la 
 CMD bats -r test

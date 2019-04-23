@@ -12,7 +12,7 @@ end
 
 
 function loop(msg)
-    local point = cjson.decode(msg)
+    local point = msg
     if point and point.point then
         histogram = histogram_update(conn, hist_key, point.point, 5)
         for k,v in pairs(histogram) do 
@@ -23,7 +23,7 @@ function loop(msg)
         output["point"] = point.point
         output["hist"] = histogram
         output["density"] = "3->" .. d
-        dragonfly.output_event("log", cjson.encode(output))
+        dragonfly.output_event("log", output)
     else
         dragonfly.output_event("debug", "Unable to parse msg: " .. msg)
     end

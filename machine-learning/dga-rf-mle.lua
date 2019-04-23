@@ -186,7 +186,7 @@ end
 --
 -- ----------------------------------------------
 function loop(msg)
-	local eve = cjson.decode(msg)
+	local eve = msg
 	
 	-- Note we're assuming you are using Suricata DNS logging version 2. 
 	if eve and eve.dns.type == 'answer' and eve.dns.rrname and eve.dns.answers then
@@ -216,7 +216,7 @@ function loop(msg)
 			analytics.dga = dga
 			eve.analytics = analytics
 		
-			dragonfly.output_event ("log", cjson.encode(eve))
+			dragonfly.output_event ("log", eve)
 	else 
 		dragonfly.output_event("log", msg)
 	end

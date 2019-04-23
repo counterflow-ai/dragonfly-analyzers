@@ -48,7 +48,7 @@ end
 --
 -- ----------------------------------------------
 function loop(msg)
-    local eve = cjson.decode(msg)
+    local eve = msg
 	local fields = {"ip_info.internal_ips",
                     ["ip_info.internal_ip_code"] = {ip_internal_code.SRC,
                                                     ip_internal_code.DEST},
@@ -101,5 +101,5 @@ function loop(msg)
     analytics["unique_src"] = unique_src
     eve["analytics"] = analytics
 
-    dragonfly.analyze_event(default_analyzer, cjson.encode(eve))
+    dragonfly.analyze_event(default_analyzer, eve)
 end

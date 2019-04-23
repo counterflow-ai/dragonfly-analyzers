@@ -38,7 +38,7 @@ end
 
 function loop(msg)
     local start = os.clock()
-    local eve = cjson.decode(msg)
+    local eve = msg
 	local fields = {"ip_info.internal_ips",
                     ["ip_info.internal_ip_code"] = {ip_internal_code.SRC,
                                                     ip_internal_code.DEST},
@@ -72,7 +72,7 @@ function loop(msg)
         dragonfly.log_event(analyzer_name..': '..cmd..' : '..reply.name)
         analytics["dga"] = dga
         eve["analytics"] = analytics
-        dragonfly.analyze_event(default_analyzer, cjson.encode(eve)) 
+        dragonfly.analyze_event(default_analyzer, eve) 
         return
     end
 
@@ -81,7 +81,7 @@ function loop(msg)
         dragonfly.log_event(analyzer_name..': Could not match score and domain: '.. reply)
         analytics["dga"] = dga
         eve["analytics"] = analytics
-        dragonfly.analyze_event(default_analyzer, cjson.encode(eve)) 
+        dragonfly.analyze_event(default_analyzer, eve) 
         return
     end
 
@@ -89,7 +89,7 @@ function loop(msg)
         dragonfly.log_event(analyzer_name..': Could not convert to number: '.. score)
         analytics["dga"] = dga
         eve["analytics"] = analytics
-        dragonfly.analyze_event(default_analyzer, cjson.encode(eve)) 
+        dragonfly.analyze_event(default_analyzer, eve) 
         return
     end
 
@@ -97,7 +97,7 @@ function loop(msg)
     dga["domain"] = domain
     analytics["dga"] = dga
     eve["analytics"] = analytics
-    dragonfly.analyze_event(default_analyzer, cjson.encode(eve)) 
+    dragonfly.analyze_event(default_analyzer, eve) 
     local now = os.clock()
     local delta = now - start
     dragonfly.log_event(analyzer_name..': time: '..delta)

@@ -41,7 +41,7 @@ end
 -- ----------------------------------------------
 function loop(msg)
     local start = os.clock()
-    local eve = cjson.decode(msg)
+    local eve = msg
 	local fields = {'ip_info.internal_ips',
                     ['proto'] = {'TCP','UDP'},
                     ['event_type'] = 'flow',}
@@ -154,7 +154,7 @@ function loop(msg)
     analytics["bytes_rank"] = bytes_rank
     eve["analytics"] = analytics
 
-    dragonfly.analyze_event(default_analyzer, cjson.encode(eve))
+    dragonfly.analyze_event(default_analyzer, eve)
     local now = os.clock()
     local delta = now - start
     dragonfly.log_event(analyzer_name..': time: '..delta)

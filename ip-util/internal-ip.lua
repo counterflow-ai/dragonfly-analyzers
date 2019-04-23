@@ -70,7 +70,7 @@ end
 
 function loop(msg)
     local start = os.clock()
-    local eve = cjson.decode(msg)
+    local eve = msg
 	local fields = {'src_ip',
 			        'dest_ip',}
     if not check_fields(eve, fields) then
@@ -108,7 +108,7 @@ function loop(msg)
     ip_info["internal_ips"] = internal_ips
     eve["ip_info"] = ip_info
 
-    dragonfly.analyze_event(default_analyzer, cjson.encode(eve))
+    dragonfly.analyze_event(default_analyzer, eve)
     local now = os.clock()
     local delta = now - start
     dragonfly.log_event(analyzer_name..': time: '..delta)

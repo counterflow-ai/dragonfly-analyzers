@@ -33,7 +33,7 @@ local analyzer_name = 'Write to Log'
 
 function loop(msg)
     if msg then
-        local eve = cjson.decode(msg)
+        local eve = msg
         if eve then
             local output_time = os.time()
             local ingest_time = eve['dragonfly_ingest_timestamp_unix']
@@ -43,7 +43,7 @@ function loop(msg)
             end
             eve['dragonfly_output_timestamp_unix'] = output_time
             eve['dragonfly_output_timestamp'] = os.date("!%Y-%m-%dT%TZ")
-            dragonfly.output_event(default_output, cjson.encode(eve))
+            dragonfly.output_event(default_output, eve)
         else
             dragonfly.output_event(default_output, msg)
         end

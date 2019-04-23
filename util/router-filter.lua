@@ -6,7 +6,7 @@ end
 --
 -- ----------------------------------------------
 function loop(msg)
-    local eve = cjson.decode(msg)
+    local eve = msg
     if eve then
         -- print(msg)
         if eve.event_type=="dns" then

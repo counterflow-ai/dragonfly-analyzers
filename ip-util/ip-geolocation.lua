@@ -73,7 +73,7 @@ end
 
 function loop(msg)
     local start = os.clock()
-    local eve = cjson.decode(msg)
+    local eve = msg
 	local fields = {"ip_info.internal_ips",
                     ["ip_info.internal_ip_code"] = {ip_internal_code.SRC,
                                                     ip_internal_code.DEST},
@@ -101,14 +101,14 @@ function loop(msg)
 
         analytics["ip_geo"] = ip_geo
         eve["analytics"] = analytics
-        dragonfly.analyze_event(default_analyzer, cjson.encode(eve)) 
+        dragonfly.analyze_event(default_analyzer, eve) 
         return
     end
     
     local ip_geo = {}
     if GetIPType(external_ip) ~= ip_version.IPV4 then  --Get IP Type of External IP
         dragonfly.log_event(analyzer_name..': not ipv4')
-        dragonfly.analyze_event(default_analyzer, cjson.encode(eve)) 
+        dragonfly.analyze_event(default_analyzer, eve) 
         return
     end
 
@@ -132,7 +132,7 @@ function loop(msg)
 
     analytics["ip_geo"] = ip_geo
     eve["analytics"] = analytics
-    dragonfly.analyze_event(default_analyzer, cjson.encode(eve)) 
+    dragonfly.analyze_event(default_analyzer, eve) 
     local now = os.clock()
     local delta = now - start
     dragonfly.log_event(analyzer_name..': time: '..delta)

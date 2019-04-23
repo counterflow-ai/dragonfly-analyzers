@@ -116,7 +116,7 @@ function histogram_density(conn, hist_key, point)
         end
     end
     table.sort(keyList)
-    dragonfly.output_event("debug", cjson.encode(keyList))
+    dragonfly.output_event("debug", keyList)
 
     for index,bin in ipairs(keyList) do 
         if tonumber(bin) > point then

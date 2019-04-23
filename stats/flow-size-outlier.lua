@@ -34,8 +34,7 @@ end
 -- storing the entire data to compute
 -- See Real-Time Analytics , Byron Ellis (Wiley 2014), pg296 for more information
 -- ----------------------------------------------
-function loop(msg)
-    local eve = cjson.decode(msg)
+function loop(eve)
     if eve and eve.event_type == 'flow' and (eve.proto=='TCP' or eve.proto=='UDP') then
         -- extract the fields
         total_pkts = eve.flow.pkts_toclient + eve.flow.pkts_toserver
@@ -44,7 +43,7 @@ function loop(msg)
         -- Update the Median
         last_median = update_median(mad_id .. ":median", total_bytes) -- Returns median prior to the update so that it is not skewed by the current value
         if not last_median then
-            dragonfly.analyze_event(default_analyzer, msg)
+            dragonfly.analyze_event(default_analyzer, eve)
             return
         end
 
@@ -98,9 +97,9 @@ function loop(msg)
         analytics["bytes_mad"] = bytes_mad
         eve["analytics"] = analytics
 
-        dragonfly.analyze_event(default_analyzer, cjson.encode(eve)) 
+        dragonfly.analyze_event(default_analyzer, eve) 
     else 
-        dragonfly.analyze_event("sink", msg)
+        dragonfly.analyze_event("sink", eve)
     end
 end
 
