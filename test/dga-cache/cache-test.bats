@@ -13,7 +13,7 @@ function setup() {
 # }
 
 @test "Test DGA Cache" {
-    skip "Due to the DNS and Alerts being handled by the MLE in different queues, this test can fail intermittendly if the alerts win the race."
+    skip "Due to the DNS and Alerts being handled by the MLE in different queues, due to the small test set this test can fail intermittendly if the alerts win the race. In production the alerts come after the dns request making a race possible but unlikely"
     # Copy Test Files Into Position
     cp machine-learning/dga-lr-mle.lua /usr/local/dragonfly-mle/analyzer/.
     cp event-triage/alert-dns-cache.lua /usr/local/dragonfly-mle/analyzer/.

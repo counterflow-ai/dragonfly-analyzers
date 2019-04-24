@@ -4,7 +4,7 @@ LABEL  maintainer="af@counterflowai.com" domain="counterflow.ai"
 RUN apt-get clean
 RUN apt-get autoremove
 RUN apt-get update --fix-missing
-RUN apt-get install -y zlib1g-dev libluajit-5.1 liblua5.1-dev lua-socket libcurl4-openssl-dev libatlas-base-dev libhiredis-dev syslog-ng git make jq libmicrohttpd-dev procps bc python3
+RUN apt-get install -y zlib1g-dev libluajit-5.1 liblua5.1-dev lua-socket libcurl4-openssl-dev libatlas-base-dev libhiredis-dev git make jq libmicrohttpd-dev procps bc python3
 
 RUN git clone https://github.com/counterflow-ai/dragonfly-mle;
 #RUN git clone -b devel https://github.com/counterflow-ai/dragonfly-mle; \
@@ -38,7 +38,7 @@ RUN apt-get purge -y build-essential git make; apt-get autoremove ; apt-get auto
 
 RUN mkdir /usr/local/mle-data
 RUN mkdir /var/log/dragonfly-mle
-RUN /etc/init.d/syslog-ng restart
+# RUN /etc/init.d/syslog-ng restart
 
 WORKDIR dragonfly-analyzers
 COPY . /dragonfly-analyzers
