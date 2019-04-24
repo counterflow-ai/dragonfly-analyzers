@@ -71,7 +71,7 @@ sh analyzer-install.sh filter
 
 ### Step 6: Create config.lua
 
-The `config.lua` file determines the analyzers applied to each event type and the order in which they are applied. There are example config files located in the test directories.  We have also included an example configuration to add a priority score to IDS alerts. It is included in the `dragonfly-analyzers/config` directory. To run the overall-priority configuration, run the following commands: 
+The `config.lua` file determines the analyzers applied to each event type and the order in which they are applied. There are example config files located in the test directories.  We have included example configurations to add a priority score to IDS alerts and run a DGA detector. They are included in the `dragonfly-analyzers/config` directory. For example, to use the priority score configuration, run the following commands: 
 ```
 cd dragonfly-analyzers
 cp event-triage-config.lua /usr/local/dragonfly-mle/config/config.lua
@@ -93,5 +93,5 @@ If you are using OPNids, the MLE can also be restarted from the GUI. (https://do
 
 ## Dockerfile
 
-The included Dockerfile loads the MLE and automatically runs the tests of these analyzers.  The test directory contains many examples of using the analyzer to process network metadata events.
+The included Dockerfile loads the MLE and automatically runs the tests of these analyzers.  The test directory contains many examples of using analyzers to process network metadata events.
 
