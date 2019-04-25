@@ -109,7 +109,7 @@ sh analyzer-install.sh filter
 The `config.lua` file determines the analyzers applied to each event type and the order in which they are applied. There are example config files located in the test directories.  We have included example configurations to add a priority score to IDS alerts and run a DGA detector. They are included in the `dragonfly-analyzers/config` directory. For example, to use the priority score configuration, run the following commands: 
 ```
 cd dragonfly-analyzers
-cp event-triage-config.lua /usr/local/dragonfly-mle/config/config.lua
+cp config/event-triage-config.lua /usr/local/dragonfly-mle/config/config.lua
 ```
 Note that the configuration file must be named `config.lua` or the MLE will not pick it up.
 
