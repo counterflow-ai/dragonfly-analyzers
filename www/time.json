@@ -1,7 +1,14 @@
 {
     "id": "time",
     "version": "1.0.0",
-    "name": "Write To Log",
-    "description": "Utility Analyzer that takes each input and writes to default_output",
-    "features": {}
+    "name": "Time Anomaly",
+    "description": "Counts number of events per hour and creates a probability based on the total count for each hour divided by the total number of events.",
+    "features": {
+                "hour": "Two digit hour indicator",
+                "timezone": "For mapping in visualization",
+                "score": "Inverse probabilty of hour appearing in data",
+                "count": "Number of times this hour appears",
+                "total": "Total of number of events",
+                "threshold": "Hard-coded decision threshold for an outlier"
+    }
 }

@@ -1,7 +1,7 @@
 {
-    "id": "sink",
+    "id": "router",
     "version": "1.0.0",
-    "name": "Write To Log",
-    "description": "Utility Analyzer that takes each input and writes to default_output",
+    "name": "Router Filter",
+    "description": "Utility Analyzer that send messages to different analyzers based on type",
     "features": {}
 }

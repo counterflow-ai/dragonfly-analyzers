@@ -1,7 +1,13 @@
 {
-    "id": "sink",
+    "id": "signature",
     "version": "1.0.0",
-    "name": "Write To Log",
-    "description": "Utility Analyzer that takes each input and writes to default_output",
-    "features": {}
+    "name": "Signature Anomaly",
+    "description": "Counts number of signatures from each id and creates a probability based the total count for a signature divided by the total number of events.",
+    "features": {
+        "unique_signatures": "Distinct signature count",
+        "score": "Inverse probabilty of signature appearing",
+        "count": "Number of times this signature appears",
+        "total": "Total of number of alerts",
+        "threshold": "Hard-coded decision threshold for an outlier"
+    }
 }
