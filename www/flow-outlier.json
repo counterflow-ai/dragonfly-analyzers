@@ -1,0 +1,15 @@
+{
+    "id": "flow-outlier",
+    "version": "1.0.0",
+    "name": "Flow Size Outlier",
+    "description": "Flow-size outlier computes a robust measure of outlier-ness based on the deviation from the median of recent flows.  Flows with extremely high or extremely low deviation multiples are considered outliers.  These deviation multiples  are computed from the Median Absolute Deviation.",
+    "features": {
+        "since": "last time the counter was reset",
+        "n": "Total number of events used to estimate the median",
+        "median": "The estimate of the median at this time",
+        "median_deviation": "The median of the deviations from the median in the sample so far",
+        "deviation": "the deviation of the current flow",
+        "multiple": "deviation / median deviation",
+        "source": "unique script identifier",
+    }
+}

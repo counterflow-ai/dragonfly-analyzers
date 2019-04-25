@@ -1,0 +1,12 @@
+{
+    "id": "invalid-cert",
+    "version": "1.0.0",
+    "name": "Invalid Cert Count",
+    "description": "Invalid Certificate Count aggregates by IP any TLS alerts from the Suricata rule set. This only counts alerts pertaining to Invalid TLS with signature ids between 2230000 to 2230020",
+    "features": {
+        "dest_total_invalid": "Total of Invalid TLS alerts for this IP",
+        "dest_type_count": "Count of this alert type for this IP",
+        "src_total_invalid": "Total of Invalid TLS alerts for this IP",
+        "src_type_count": "Count of this alert type for this IP"
+    }
+}

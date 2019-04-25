@@ -50,7 +50,7 @@ function teardown() {
     echo "# $dragonfly_pid"
     cd $OLDPWD
 
-    timeout=45
+    timeout=60
     n_lines=12
     log_file="/var/log/dragonfly-mle/dragonfly-priority-test.log"
 

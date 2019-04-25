@@ -1,0 +1,7 @@
+{
+    "id": "time",
+    "version": "1.0.0",
+    "name": "Write To Log",
+    "description": "Utility Analyzer that takes each input and writes to default_output",
+    "features": {}
+}

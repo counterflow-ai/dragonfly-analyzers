@@ -22,7 +22,7 @@ analyzers = {
    { tag="time", script="time-anomaly.lua", default_analyzer="ip", default_output="log" },
    { tag="ip", script="internal-ip.lua", default_analyzer="router", default_output="log" },
    { tag="router", script="router-filter.lua", default_analyzer="blacklist", default_output="log" },
-   { tag="dns", script="dga-lr-mle.lua", default_analyzer="sink", default_output="log" },
+   { tag="dga", script="dga-lr-mle.lua", default_analyzer="sink", default_output="log" },
    { tag="bytes_rank",script="total-bytes-rank.lua",default_analyzer="sink", default_output="log" },
    { tag="blacklist", script="ip-blacklist.lua", default_analyzer="geo", default_output="log"},
    { tag="geo", script="ip-geolocation.lua", default_analyzer="country", default_output="log"},

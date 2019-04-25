@@ -29,12 +29,8 @@ for val in $analyzer_dirs; do
     rsync_dirs="$rsync_dirs $val/*"
 done
 
-## If you prefer to use rsync, which is not installed by default on OPNids
-# echo "rsync -vvu $rsync_dirs $dragonfly_root/$destination"
-# rsync -vvu $rsync_dirs $dragonfly_root/$destination
-
-# Perform the copy, using "no-clobber" and "verbose" options. The script won't copy over
+# Perform the install, using "backup" and "verbose" options. The script will backup
 # any files that have been updated in the analyzer directory
 # Note: You must copy all config files manually
-echo "cp -nv $rsync_dirs $dragonfly_root/$destination"
-cp -nv $rsync_dirs $dragonfly_root/$destination
+echo "install -b --suffix=.old -v $rsync_dirs $dragonfly_root/$destination"
+install -b --suffix=.old -v $rsync_dirs $dragonfly_root/$destination

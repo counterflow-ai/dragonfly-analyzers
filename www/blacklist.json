@@ -1,0 +1,9 @@
+{
+    "id": "blacklist",
+    "version": "1.0.0",
+    "name": "IP Blacklist",
+    "description": "Use IP reputation lists provided by abuse.ch. Optional: use the dragonfly.http_get() function to refresh the lists at start-up or based on a timer event",
+    "features": {
+        "ip_rep": "one of {NONE, feodo, ransomware, zeus}"
+    }
+}
