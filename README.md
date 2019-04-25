@@ -2,6 +2,41 @@
 
 These are a collection of analyzers to use with the [Dragonfly Machine Learning Engine (MLE)](https://github.com/counterflow-ai/dragonfly-mle)on [OPNids](https://opnids.io). An analyzer processes an input event, updating the event with additional information or caching data from the event in Redis for future use. 
 
+## Included Analyzers
+
+| Filename | Description |
+| ----- | ----- |
+| anomaly/country-anomaly.lua | Flag rare countries |
+| anomaly/signature-anomaly.lua  | Flag rare alerts |
+| anomaly/time-anomaly.lua  | Flag events at odd hours |
+| blacklist/example-dns.lua  | Use abuse.ch blacklists for dns |
+| blacklist/example-flow.lua  |  Use abuse.ch blacklists for dns |
+| blacklist/example-tls.lua  | Check certificate validity |
+| event-triage/alert-dns-cache.lua  | Copy data fields from DNS responses to following alerts |
+| event-triage/alert-triage.lua | Prioritize alerts based on frequency of alerts |
+| event-triage/invalid-cert-count.lua | Count invalid certificate accesses by each IP address |
+| event-triage/overall-priority.lua | Combine anomaly scores into a single priority score |
+| filter/default-filter.lua | Simple passthrough filter |
+| filter/dga-filter.lua | Route DNS message through the DGA detector |
+| ip-util/internal-ip.lua | Identify source and destination IPs as internal or external (requires config) |
+| ip-util/ip-asn.lua | Annotate events with ASN |
+| ip-util/ip-blacklist.lua | Annotate events based on abuse.ch blacklists |
+| ip-util/ip-geolocation.lua | Use IP2location to identify which country is the source of traffic |
+| machine-learning/dga-lr-mle.lua | Detect potential DGA domains with a logistic regression classifier | 
+| machine-learning/dga-rf-mle.lua | Detect potential DGA domains with a random forest classifier |
+| stats/flow-size-outlier.lua | Computes flow outliers using Median Absolute Deviation |
+| top-talkers/connection-count-hll.lua | Track connection count by IP using a HyperLogLog sketch (probabilistic data structure) |
+| top-talkers/total-bytes-rank.lua | Sum bytes across flows using Redis sorted set |
+| util/router-filter.lua | Example analyzer for routing events based on a conditional test |
+| util/write-to-log.ua | Convenience function to support config only routing of messages |
+
+### Additional Utility Functions
+
+| Filename | Description |
+| ----- | ----- |
+| ip-util/ip-utils.lua | Utility functions for identifying IPv4 and IPv6 addresses and more |
+| util/utils.lua | Handy functions for check existence of JSON fields |
+
 ## Usage
 
 Analyzers must be installed in the root directory of the MLE. For most installations this is `/usr/local/dragonfly-mle/analyzer`. Analyzer usage is specified in the `/usr/local/dragonfly-mle/config.lua` file.
@@ -90,6 +125,34 @@ cd /usr/local/dragonfly-mle
 ./bin/dragonfly-mle
 ```
 If you are using OPNids, the MLE can also be restarted from the GUI. (https://docs.opnids.io/manual/gui.html)
+
+### Step 8: Check the Output of the MLE
+
+To check the output of the MLE, look at the `eve-mle.json` file.
+
+```
+wc -l /var/log/dragonfly-mle/eve-mle.json
+tail /var/log/dragonfly-mle/eve-mle.json
+```
+
+The line count should be increasing.
+
+If you ran these instructions as they are written you can send data to the MLE using the following command:
+
+```
+cat /path/to/dragonfly-analyzers/test/overall-priority/priority-test-data.json >> /var/log/suricata/eve.json
+```
+
+This will inject several JSON events for processing by the MLE.  Output can be checked using the same commands as listed above.
+
+
+## Analyzer Description File Does Not Exist
+
+You may see lines like the following in the MLE output:
+```
+dragonfly: analyzer description file /www/time.json does not exist.
+```
+If this occurs, the MLE is still processing events.  The description files are a way to provide an explanation of the model. The description files must be named the same as the `tag` field in the `config/config.lua` that is used by the MLE.  You can either rename the description files to match your `config.lua` or change the tags in the `config.lua` to match the description files.
 
 ## Dockerfile
 
