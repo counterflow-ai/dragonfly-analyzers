@@ -131,8 +131,8 @@ If you are using OPNids, the MLE can also be restarted from the GUI. (https://do
 To check the output of the MLE, look at the `eve-mle.json` file.
 
 ```
-wc -l /var/log/dragonfly-mle/eve-mle.json
-tail /var/log/dragonfly-mle/eve-mle.json
+wc -l /var/log/dragonfly-mle/eve-mle.log
+tail /var/log/dragonfly-mle/eve-mle.log
 ```
 
 The line count should be increasing.
