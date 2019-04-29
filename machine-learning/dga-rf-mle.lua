@@ -16,6 +16,7 @@
 -- ----------------------------------------------
 
 local open = io.open
+require 'analyzer/utils'
 local dt = require('analyzer/feature') -- contains data transformation functions
 
 -- ----------------------------------------------
@@ -148,6 +149,9 @@ end
 -- ----------------------------------------------
 --
 -- ----------------------------------------------
+
+local analyzer_name = 'Random Forest DGA'
+
 function setup()
 	conn = hiredis.connect()
 	assert(conn:command("PING") == hiredis.status.PONG)
@@ -158,13 +162,16 @@ function setup()
 	-- Random Forest Model
 	print ("Loading Random Forest model from file......")
 	for i = 1,numTrees do
-		treeFile = mlpath .. "-" .. i .. ".ml"
+		treeFile = mlpath .. "-" .. i .. ".model"
 		print(treeFile)
 		local file = open(treeFile, "rb") -- r read mode 
 		local model = file:read ("*a")
 		file:close()
 		reply = conn:command_line("ML.FOREST.ADD " .. model)
 	end
+
+	version = "0.0.1"
+
     print ("loaded ML model: ", reply)
 end
 
@@ -173,37 +180,82 @@ end
 -- ----------------------------------------------
 function loop(msg)
 	local eve = msg
+
+	local start = os.clock()
+    -- Note we're assuming you are using Suricata DNS logging version 1. 
+    local eve = msg
+	local fields = {'dns.rrname',
+                    'dns.rdata',
+                    ['dns.type'] = 'answer',}
+    if not check_fields(eve, fields) then
+        dragonfly.log_event(analyzer_name..': Required fields missing')
+        dragonfly.analyze_event(default_analyzer, msg)
+        return
+    end
+
+	 local start = os.clock()
+    -- Note we're assuming you are using Suricata DNS logging version 1. 
+    local eve = msg
+	local fields = {'dns.rrname',
+                    'dns.rdata',
+                    ['dns.type'] = 'answer',}
+    if not check_fields(eve, fields) then
+        dragonfly.log_event(analyzer_name..': Required fields missing')
+        dragonfly.analyze_event(default_analyzer, msg)
+        return
+    end
+
+    -- ----------------------------------------------
+    -- DNS analysis
+    -- ----------------------------------------------
+	local features = transform(eve.dns.rrname)
 	
-	-- Note we're assuming you are using Suricata DNS logging version 2. 
-	if eve and eve.dns.type == 'answer' and eve.dns.rrname and eve.dns.answers then
-			local features = transform (eve.dns.rrname)
+	command = {}
+	names = getFeatureNames() -- Need to combine feature names together to call the Random Forest
 
-			command = {}
-			names = getFeatureNames() -- Need to combine feature names together to call the Random Forest
-
-			for i = 1,table.getn(features) do
-				table.insert(command, names[i] .. ":" .. features[i])
-			end
-
-
-			local ml_command = "ML.FOREST.RUN" .. " " .. "dga:tree " .. table.concat(command, ",") .. " REGRESSION"
-			reply = conn:command_line(ml_command)
-			
-
-			analytics = eve.analytics
-			if not analytics then
-				analytics = {}
-			end
-			
-			dga = {}
-			dga.score = reply
-			dga.source = "dga/dga-rf-mle.lua"
-
-			analytics.dga = dga
-			eve.analytics = analytics
-		
-			dragonfly.output_event ("log", eve)
-	else 
-		dragonfly.output_event("log", msg)
+	for i = 1,table.getn(features) do
+		table.insert(command, names[i] .. ":" .. features[i])
 	end
+
+	local cmd = "ML.FOREST.RUN" .. " " .. "dga:tree " .. table.concat(command, ",") .. " REGRESSION"
+	-- local cmd = 'ML.LOGREG.PREDICT dga'
+    local reply = conn:command_line(cmd)
+    if type(reply) == 'table' and reply.name ~= 'OK' then
+        dragonfly.log_event(analyzer_name..': '..cmd..': '..reply.name)
+        dragonfly.analyze_event(default_analyzer, msg)
+        return
+    end 
+	
+	if not tonumber(reply) then
+        dragonfly.log_event(analyzer_name..': Could not convert tonumber reply '.. reply)
+        dragonfly.analyze_event(default_analyzer, msg)
+        return
+    end 
+
+
+    analytics = eve.analytics
+    if not analytics then
+        analytics = {}
+    end
+    
+    dga = {}
+    dga.score = tonumber(reply)
+    dga.source = "dga/dga-rf-mle.lua"
+    dga.version = version
+
+    analytics.dga = dga
+    eve.analytics = analytics
+
+    if eve.dns.rdata then
+        local cmd = 'SETEX dga:'..eve.dns.rdata..' 60 '..dga.score..':'..eve.dns.rrname
+        local reply = conn:command_line(cmd)
+        if type(reply) == 'table' and reply.name ~= 'OK' then
+            dragonfly.log_event(analyzer_name..': '..cmd..': '..reply.name)
+        end 
+    end
+
+    dragonfly.analyze_event(default_analyzer, eve)
+    local now = os.clock()
+    local delta = now - start
+    dragonfly.log_event(analyzer_name..': time: '..delta)
 end
