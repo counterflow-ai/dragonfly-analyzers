@@ -16,10 +16,10 @@ function setup() {
 
 @test "Test Internal Network IP Extraction Example" {
     # Copy Test Files Into Position
-    cp ip-util/ip-utils.lua /usr/local/dragonfly-mle/analyzer/.
-    cp util/utils.lua /usr/local/dragonfly-mle/analyzer/.
-    cp ip-util/internal-ip.lua /usr/local/dragonfly-mle/analyzer/.
-    cp util/write-to-log.lua /usr/local/dragonfly-mle/analyzer/.
+    [ -e /usr/local/dragonfly-mle/analyzer/ip-utils.lua ]
+    [ -e /usr/local/dragonfly-mle/analyzer/utils.lua ]
+    [ -e /usr/local/dragonfly-mle/analyzer/internal-ip.lua ]
+    [ -e /usr/local/dragonfly-mle/analyzer/write-to-log.lua ]
     cp test/ip-internal/internal-test-config.lua /usr/local/dragonfly-mle/config/config.lua
     cp test/ip-internal/internal-test-filter.lua /usr/local/dragonfly-mle/filter/.
     cp test/ip-internal/internal-test-data.json /usr/local/mle-data/.

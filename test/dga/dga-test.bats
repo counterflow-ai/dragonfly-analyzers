@@ -23,12 +23,12 @@ function teardown() {
 
 @test "Test DGA Example" {
     # Copy Test Files Into Position
-    cp ip-util/ip-utils.lua /usr/local/dragonfly-mle/analyzer/.
-    cp util/utils.lua /usr/local/dragonfly-mle/analyzer/.
-    cp util/write-to-log.lua /usr/local/dragonfly-mle/analyzer/.
-    cp machine-learning/dga-lr-mle.lua /usr/local/dragonfly-mle/analyzer/.
-    cp event-triage/alert-dns-cache.lua /usr/local/dragonfly-mle/analyzer/.
-    cp machine-learning/feature.lua /usr/local/dragonfly-mle/analyzer/.
+    [ -e /usr/local/dragonfly-mle/analyzer/ip-utils.lua ]
+    [ -e /usr/local/dragonfly-mle/analyzer/utils.lua ]
+    [ -e /usr/local/dragonfly-mle/analyzer/write-to-log.lua ]
+    [ -e /usr/local/dragonfly-mle/analyzer/dga-lr-mle.lua ]
+    [ -e /usr/local/dragonfly-mle/analyzer/alert-dns-cache.lua ]
+    [ -e /usr/local/dragonfly-mle/analyzer/feature.lua ]
 
     cp test/dga/dga-test-config.lua /usr/local/dragonfly-mle/config/config.lua
     cp ip-util/internal-ip.lua /usr/local/dragonfly-mle/filter/.
@@ -128,17 +128,17 @@ EOF
 
 @test "Test Load Random Forest DGA" {
     # Copy Test Files Into Position
-    cp ip-util/ip-utils.lua /usr/local/dragonfly-mle/analyzer/.
-    cp util/utils.lua /usr/local/dragonfly-mle/analyzer/.
-    cp util/write-to-log.lua /usr/local/dragonfly-mle/analyzer/.
-    cp machine-learning/dga-rf-mle.lua /usr/local/dragonfly-mle/analyzer/.
-    cp machine-learning/dga-rf-1.model /usr/local/dragonfly-mle/analyzer/.
-    cp machine-learning/dga-rf-2.model /usr/local/dragonfly-mle/analyzer/.
-    cp machine-learning/dga-rf-3.model /usr/local/dragonfly-mle/analyzer/.
-    cp machine-learning/dga-rf-4.model /usr/local/dragonfly-mle/analyzer/.
-    cp machine-learning/dga-rf-5.model /usr/local/dragonfly-mle/analyzer/.
-    cp event-triage/alert-dns-cache.lua /usr/local/dragonfly-mle/analyzer/.
-    cp machine-learning/feature.lua /usr/local/dragonfly-mle/analyzer/.
+    [ -e /usr/local/dragonfly-mle/analyzer/ip-utils.lua ]
+    [ -e /usr/local/dragonfly-mle/analyzer/utils.lua ]
+    [ -e /usr/local/dragonfly-mle/analyzer/write-to-log.lua ]
+    [ -e /usr/local/dragonfly-mle/analyzer/dga-rf-mle.lua ]
+    [ -e /usr/local/dragonfly-mle/analyzer/dga-rf-1.model ]
+    [ -e /usr/local/dragonfly-mle/analyzer/dga-rf-2.model ]
+    [ -e /usr/local/dragonfly-mle/analyzer/dga-rf-3.model ]
+    [ -e /usr/local/dragonfly-mle/analyzer/dga-rf-4.model ]
+    [ -e /usr/local/dragonfly-mle/analyzer/dga-rf-5.model ]
+    [ -e /usr/local/dragonfly-mle/analyzer/alert-dns-cache.lua ]
+    [ -e /usr/local/dragonfly-mle/analyzer/feature.lua ]
 
     cp test/dga/dga-test-rf-config.lua /usr/local/dragonfly-mle/config/config.lua
     cp ip-util/internal-ip.lua /usr/local/dragonfly-mle/filter/.

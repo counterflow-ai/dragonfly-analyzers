@@ -21,14 +21,17 @@ function teardown() {
 
 @test "Test IP Reputation Example" {
     # Copy Test Files Into Position
-    cp util/utils.lua /usr/local/dragonfly-mle/analyzer/.
-    cp ip-util/ip-utils.lua /usr/local/dragonfly-mle/analyzer/.
-    cp ip-util/internal-ip.lua /usr/local/dragonfly-mle/analyzer/.
-    cp util/write-to-log.lua /usr/local/dragonfly-mle/analyzer/.
-    cp ip-util/ip-blacklist.lua /usr/local/dragonfly-mle/analyzer/.
-    cp ip-util/ipblocklist.txt /usr/local/dragonfly-mle/analyzer/.
-    cp ip-util/zeus_badips.txt /usr/local/dragonfly-mle/analyzer/.
-    cp ip-util/RW_IPBL.txt /usr/local/dragonfly-mle/analyzer/.
+    [ -e /usr/local/dragonfly-mle/analyzer/utils.lua ]
+    [ -e /usr/local/dragonfly-mle/analyzer/ip-utils.lua ]
+    [ -e /usr/local/dragonfly-mle/analyzer/internal-ip.lua ]
+    [ -e /usr/local/dragonfly-mle/analyzer/write-to-log.lua ]
+    [ -e /usr/local/dragonfly-mle/analyzer/ip-blacklist.lua ]
+    # cp ip-util/ipblocklist.txt /usr/local/dragonfly-mle/analyzer/.
+    [ -e /usr/local/dragonfly-mle/analyzer/ipblocklist.txt ]
+    # cp ip-util/zeus_badips.txt /usr/local/dragonfly-mle/analyzer/.
+    [ -e /usr/local/dragonfly-mle/analyzer/zeus_badips.txt ]
+    # cp ip-util/RW_IPBL.txt /usr/local/dragonfly-mle/analyzer/.
+    [ -e /usr/local/dragonfly-mle/analyzer/RW_IPBL.txt ]
     cp test/ip-reputation/reputation-test-config.lua /usr/local/dragonfly-mle/config/config.lua
     cp ip-util/internal-ip.lua /usr/local/dragonfly-mle/filter/.
     cp test/ip-reputation/reputation-test-data.json /usr/local/mle-data/.

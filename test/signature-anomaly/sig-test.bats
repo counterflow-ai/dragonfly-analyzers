@@ -21,8 +21,8 @@ function teardown() {
 
 @test "Test Signature Anomaly" {
     # Copy Test Files Into Position
-    cp anomaly/signature-anomaly.lua /usr/local/dragonfly-mle/analyzer/.
-    cp util/write-to-log.lua /usr/local/dragonfly-mle/analyzer/.
+    [ -e /usr/local/dragonfly-mle/analyzer/signature-anomaly.lua ]
+    [ -e /usr/local/dragonfly-mle/analyzer/write-to-log.lua ]
     cp test/signature-anomaly/sig-test-config.lua /usr/local/dragonfly-mle/config/config.lua
     cp test/signature-anomaly/sig-test-filter.lua /usr/local/dragonfly-mle/filter/.
     cp test/signature-anomaly/sig-test-data.json /usr/local/mle-data/.

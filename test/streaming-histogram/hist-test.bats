@@ -21,7 +21,7 @@ function teardown() {
 
 @test "Test Streaming Histogram" {
     # Copy Test Files Into Position
-    cp stats/streaming-histogram.lua /usr/local/dragonfly-mle/analyzer/.
+    [ -e /usr/local/dragonfly-mle/analyzer/streaming-histogram.lua ]
     cp test/streaming-histogram/hist-test-analyzer.lua /usr/local/dragonfly-mle/analyzer/.
     cp test/streaming-histogram/hist-test-config.lua /usr/local/dragonfly-mle/config/config.lua
     cp test/streaming-histogram/hist-test-filter.lua /usr/local/dragonfly-mle/filter/.

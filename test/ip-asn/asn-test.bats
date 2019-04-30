@@ -21,14 +21,15 @@ function teardown() {
 
 @test "Test IP ASN Lookup" {
     # Copy Test Files Into Position
-    cp ip-util/ip2asn-v4-u32.tsv /usr/local/dragonfly-mle/analyzer/.
-    cp ip-util/ip-utils.lua /usr/local/dragonfly-mle/analyzer/.
-    cp util/utils.lua /usr/local/dragonfly-mle/analyzer/.
-    cp ip-util/ip-asn.lua /usr/local/dragonfly-mle/analyzer/.
-    cp util/write-to-log.lua /usr/local/dragonfly-mle/analyzer/.
+    # cp ip-util/ip2asn-v4-u32.tsv /usr/local/dragonfly-mle/analyzer/.
+    [ -e /usr/local/dragonfly-mle/analyzer/ip2asn-v4-u32.tsv ]
+    [ -e /usr/local/dragonfly-mle/analyzer/ip-utils.lua ]
+    [ -e /usr/local/dragonfly-mle/analyzer/utils.lua ]
+    [ -e /usr/local/dragonfly-mle/analyzer/ip-asn.lua ]
+    [ -e /usr/local/dragonfly-mle/analyzer/write-to-log.lua ]
+    [ -e /usr/local/dragonfly-mle/analyzer/internal-ip.lua ]
     cp test/ip-asn/asn-test-config.lua /usr/local/dragonfly-mle/config/config.lua
     cp test/ip-asn/asn-test-filter.lua /usr/local/dragonfly-mle/filter/.
-    cp ip-util/internal-ip.lua /usr/local/dragonfly-mle/analyzer/.
     cp test/ip-asn/asn-test-data.json /usr/local/mle-data/.
 
     # Fire Up Dragonfly

@@ -21,9 +21,9 @@ function teardown() {
 
 @test "Test Invalid Certificates" {
     # Copy Test Files Into Position
-    cp util/utils.lua /usr/local/dragonfly-mle/analyzer/.
-    cp event-triage/invalid-cert-count.lua /usr/local/dragonfly-mle/analyzer/.
-    cp util/write-to-log.lua /usr/local/dragonfly-mle/analyzer/.
+    [ -e /usr/local/dragonfly-mle/analyzer/utils.lua ]
+    [ -e /usr/local/dragonfly-mle/analyzer/invalid-cert-count.lua ]
+    [ -e /usr/local/dragonfly-mle/analyzer/write-to-log.lua ]
     cp test/invalid-cert-count/cert-test-config.lua /usr/local/dragonfly-mle/config/config.lua
     cp test/invalid-cert-count/cert-test-filter.lua /usr/local/dragonfly-mle/filter/.
     cp test/invalid-cert-count/cert-test-data.json /usr/local/mle-data/.
