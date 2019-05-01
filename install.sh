@@ -12,8 +12,9 @@ dragonfly_root="/usr/local/dragonfly-mle"
 destination="analyzer"
 #analyzer_dirs="ip-util util"
 analyzer_dirs=""
-DATA=0
-FILTER=0
+DATA=-1
+FILTER=-1
+WWW=-1
 DIR=""
 usage=$'Usage: ./install.sh <options> <folder_name[s]> \n   -h|--help - Show this message\n   -d|--data - Download data files\n   -n|--nodata - Skip data download\n   -f|--filter - Copy filter files\n   -a|--all - Equivalent to ./install.sh -d -f anomaly event-triage ip-util machine-learning stats top-talkers util\nNote: Configuration files must be copied manually.'
 
@@ -43,10 +44,17 @@ while [[ $# -gt 0 ]]; do
         -f|--filter)
         FILTER=1
         ;;
+        # Install www directory
+        -w|--www)
+        WWW=1
+        ;;
         # Install all analyzers and data
         -a|--all)
-        DATA=1
+        if [ $DATA -ne 0 ]; then
+            DATA=1
+        fi
         FILTER=1
+        WWW=1
         DIR=all
         ;;
         # Ignore other options
@@ -95,6 +103,11 @@ fi
 if [[ $FILTER = 1 ]] ; then 
     echo "install -b --suffix=.old -v filter/* $dragonfly_root/filter"
     install -b --suffix=.old -v filter/* $dragonfly_root/filter
+fi 
+
+if [[ $WWW = 1 ]] ; then 
+    echo "install -b --suffix=.old -v www/* $dragonfly_root/www"
+    install -b --suffix=.old -v www/* $dragonfly_root/www
 fi 
 
 if [[ ${#analyzer_dirs} > 1 ]] ; then
