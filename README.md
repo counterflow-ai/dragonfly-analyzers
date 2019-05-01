@@ -88,20 +88,31 @@ To install all of the analyzers, use the included script.
 
 ```
 cd dragonfly-analyzers
-sh analyzer-install.sh all
+./install.sh --all
 ```
 or you can install by category instead. For example:
 ```
 cd dragonfly-analyzers
-sh analyzer-install.sh machine-learning
+./install.sh machine-learning
+```
+Full usage of the install script can be seen with either `-h` or `--help`
+```
+# ./install.sh -h
+Usage: ./install.sh
+   -h|--help - Show this message
+   -d|--data - Download data files
+   -n|--nodata - Skip data download
+   -f|--filter - Copy filter files
+   -a|--all - Equivalent to ./install.sh -d -f anomaly event-triage ip-util machine-learning stats top-talkers util
+Note: Configuration files must be copied manually.
 ```
 
 ### Step 5 (OPTIONAL): Install filters
 
-If you installed selected analyzers only, you will want to also install the filters. These are included in the `all` group.
+If you installed selected analyzers only, you will want to also install the filters. These are included in the `all` group by default.
 ```
 cd dragonfly-analyzers
-sh analyzer-install.sh filter
+./install.sh -f
 ```
 
 ### Step 6: Create config.lua
@@ -111,7 +122,7 @@ The `config.lua` file determines the analyzers applied to each event type and th
 cd dragonfly-analyzers
 cp config/event-triage-config.lua /usr/local/dragonfly-mle/config/config.lua
 ```
-Note that the configuration file must be named `config.lua` or the MLE will not pick it up.
+Note that the configuration file must be named `config.lua` or the MLE will not recognize it.
 
 ### Step 7: Restart the Dragonfly MLE
 
@@ -156,5 +167,5 @@ If this occurs, the MLE is still processing events.  The description files are a
 
 ## Dockerfile
 
-The included Dockerfile loads the MLE and automatically runs the tests of these analyzers.  The test directory contains many examples of using analyzers to process network metadata events.
+The included Dockerfile loads the MLE and automatically runs the tests of these analyzers.  The test directory contains many examples of configurations using analyzers to process network metadata events. The tests can also be run from an installed version of the MLE, if desired.
 
