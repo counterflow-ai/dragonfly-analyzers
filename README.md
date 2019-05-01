@@ -98,7 +98,7 @@ cd dragonfly-analyzers
 Full usage of the install script can be seen with either `-h` or `--help`
 ```
 # ./install.sh -h
-Usage: ./install.sh
+Usage: ./install.sh <options> <folder_name[s]> 
    -h|--help - Show this message
    -d|--data - Download data files
    -n|--nodata - Skip data download
