@@ -16,7 +16,7 @@ DATA=-1
 FILTER=-1
 WWW=-1
 DIR=""
-usage=$'Usage: ./install.sh <options> <folder_name[s]> \n   -h|--help - Show this message\n   -d|--data - Download data files\n   -n|--nodata - Skip data download\n   -f|--filter - Copy filter files\n   -a|--all - Equivalent to ./install.sh -d -f anomaly event-triage ip-util machine-learning stats top-talkers util\nNote: Configuration files must be copied manually.'
+usage=$'Usage: ./install.sh <options> <folder_name[s]> \n   -h|--help - Show this message\n   -d|--data - Download data files\n   -n|--nodata - Skip data download\n   -f|--filter - Copy filter files\n   -w|--www - Copy explainability files\n   -a|--all - Equivalent to ./install.sh -d -f anomaly event-triage ip-util machine-learning stats top-talkers util\nNote: Configuration files must be copied manually.'
 
 if [[ $# -eq 0 ]]; then
     echo "$usage"
