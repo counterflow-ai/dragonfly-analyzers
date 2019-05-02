@@ -103,11 +103,13 @@ Usage: ./install.sh <options> <folder_name[s]>
    -d|--data - Download data files
    -n|--nodata - Skip data download
    -f|--filter - Copy filter files
+   -w|--www - Copy explainability files
    -a|--all - Equivalent to ./install.sh -d -f anomaly event-triage ip-util machine-learning stats top-talkers util
 Note: Configuration files must be copied manually.
+
 ```
 
-### Step 5 (OPTIONAL): Install filters
+### Step 5: (OPTIONAL): Install filters
 
 If you installed selected analyzers only, you will want to also install the filters. These are included in the `all` group by default.
 ```
@@ -124,7 +126,15 @@ cp config/event-triage-config.lua /usr/local/dragonfly-mle/config/config.lua
 ```
 Note that the configuration file must be named `config.lua` or the MLE will not recognize it.
 
-### Step 7: Restart the Dragonfly MLE
+## Step 7: (OPTIONAL) Link `/www` directory 
+
+The MLE includes a web API to serve explanation files of the running analyzers. To enable this functionality, you will either need to create a symlink or copy the contents from the `/usr/local/dragonfly-mle/www` directory to `/www`.  If you do not complete this step, it will not impact processing but you may see lines like the following in the MLE output:
+```
+dragonfly: analyzer description file /www/time.json does not exist.
+```
+  The description files are a way to provide an explanation of the model. The description files must be named the same as the `tag` field in the `config/config.lua` that is used by the MLE.  You can either rename the description files to match your `config.lua` or change the tags in the `config.lua` to match the description files.
+
+### Step 8: Restart the Dragonfly MLE
 
 Once the config files are successfully installed, restarting the MLE is necessary. For use with OPNids:
 ```
@@ -137,7 +147,7 @@ cd /usr/local/dragonfly-mle
 ```
 If you are using OPNids, the MLE can also be restarted from the GUI. (https://docs.opnids.io/manual/gui.html)
 
-### Step 8: Check the Output of the MLE
+### Step 9: Check the Output of the MLE
 
 To check the output of the MLE, look at the `eve-mle.json` file.
 
@@ -157,13 +167,7 @@ cat /path/to/dragonfly-analyzers/test/overall-priority/priority-test-data.json >
 This will inject several JSON events for processing by the MLE.  Output can be checked using the same commands as listed above.
 
 
-## Analyzer Description File Does Not Exist
 
-You may see lines like the following in the MLE output:
-```
-dragonfly: analyzer description file /www/time.json does not exist.
-```
-If this occurs, the MLE is still processing events.  The description files are a way to provide an explanation of the model. The description files must be named the same as the `tag` field in the `config/config.lua` that is used by the MLE.  You can either rename the description files to match your `config.lua` or change the tags in the `config.lua` to match the description files.
 
 ## Dockerfile
 
