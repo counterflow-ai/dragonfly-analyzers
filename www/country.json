@@ -1,0 +1,13 @@
+{
+    "id": "country",
+    "version": "1.0.0",
+    "name": "Country Anomaly",
+    "description": "Counts number of events from each country (based on IP Geolocation) and creates a probability based the total count from a specific country divided by the total number of events.",
+    "features": {
+        "country_code":"ISO country code",
+        "score":"Inverse probabilty of country appearing",
+        "count":"Number of times this country appears",
+        "total":"Total of number of events with marked countries",
+        "threshold":"Hard-coded decision threshold for an outlier"
+    }
+}

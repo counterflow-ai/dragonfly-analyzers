@@ -1,0 +1,14 @@
+{
+    "id": "flow-rank",
+    "version": "1.0.0",
+    "name": "Total Bytes Rank",
+    "description": "Total Bytes Rank tracks the total bytes received for both source and destination IPs based and keeps a ranked list of top source and destination IPs.  Both the total bytes and rank are updated continuously and included on each flow",
+    "features": {
+        "since": "last time the counter was reset",
+        "src_rank": "Current rank of the source IP",
+        "src_total": "Total number of bytes sent",
+        "dest_rank": "Current rank of the destination IP",
+        "dest_total": "Total number of bytes recieved",
+        "source": "unique script identifier"
+    }
+}

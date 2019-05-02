@@ -1,0 +1,10 @@
+{
+    "id": "ip",
+    "version": "1.0.0",
+    "name": "Internal IP",
+    "description": "Flags internal IP addresses in both source and destination fields",
+    "features": {
+        "internal_ip_code": "0: internal source, 1: internal dest, 2: both source and dest, 2: neither",
+        "internal_ips":"List of IPs addresses identified by `internal_ip_code`"
+    }
+}

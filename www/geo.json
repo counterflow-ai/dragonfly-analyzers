@@ -1,0 +1,10 @@
+{
+    "id": "ip-geo",
+    "version": "1.0.0",
+    "name": "IP Geolocation",
+    "description": "Appends county and country code for IPv4 addresses. This product includes IP2Location LITE data available from <a href=\"https://lite.ip2location.com\">http: //lite.ip2location.com</a>.",
+    "features": {
+        "country_code":"ISO country code",
+        "country": "Full country name"
+    }
+}

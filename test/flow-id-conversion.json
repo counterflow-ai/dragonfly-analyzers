@@ -1,0 +1,335 @@
+{"timestamp":"2018-11-05T09:42:37.022644-0500","flow_id":1152895213951407,"event_type":"flow","src_ip":"71.219.178.155","src_port":39600,"dest_ip":"138.236.128.112","dest_port":123,"proto":"UDP","app_proto":"failed","flow":{"pkts_toserver":1,"pkts_toclient":1,"bytes_toserver":90,"bytes_toclient":90,"start":"2018-11-05T09:37:36.186799-0500","end":"2018-11-05T09:37:36.242077-0500","age":0,"state":"established","reason":"timeout","alerted":false}}
+
+
+{"app_proto":"failed","src_port":123,"event_type":"flow","proto":"UDP","flow_id":1.3512733146544e+15,"src_ip":"71.219.178.155","dest_port":123,"timestamp":"2018-11-05T09:43:35.012052-0500","flow":{"alerted":false,"bytes_toserver":90,"pkts_toclient":1,"reason":"timeout","pkts_toserver":1,"start":"2018-11-05T09:38:34.465128-0500","state":"established","age":0,"end":"2018-11-05T09:38:34.520642-0500","bytes_toclient":90},"dest_ip":"216.229.4.69","analytics":{"bytes_mad":{"deviation":118.45,"source":"example-outlier.lua","n":250173,"median":298.45,"median_deviation":167.4,"since":0,"multiple":0.70758661887694},"unique_src":{"count":1,"source":"connection_count","since":0},"bytes_rank":{"src_total":"23116829305","dest_total":"151560","src_rank":9793,"source":"ranked-sum.lua","dest_rank":4938,"since":0}}}
+
+
+******
+
+{
+    "app_proto": "dns",
+    "src_port": 60425,
+    "event_type": "flow",
+    "proto": "UDP",
+    "flow_id": 56766063740521,
+    "src_ip": "71.219.178.155",
+    "dest_port": 53,
+    "timestamp": "2018-11-05T10:31:09.021247-0500",
+    "flow": {
+        "alerted": false,
+        "bytes_toserver": 92,
+        "pkts_toclient": 1,
+        "reason": "timeout",
+        "pkts_toserver": 1,
+        "start": "2018-11-05T10:26:08.099945-0500",
+        "state": "established",
+        "age": 0,
+        "end": "2018-11-05T10:26:08.126431-0500",
+        "bytes_toclient": 220
+    },
+    "dest_ip": "104.248.58.8",
+    "analytics": {
+        "bytes_mad": {
+            "deviation": 2.2,
+            "source": "example-outlier.lua",
+            "n": 257692,
+            "median": 309.8,
+            "median_deviation": 149.75,
+            "since": 0,
+            "multiple": 0.014691151919866
+        },
+        "unique_src": {
+            "count": 1,
+            "source": "connection_count",
+            "since": 0
+        },
+        "bytes_rank": {
+            "src_total": "23503566394",
+            "dest_total": "29493083",
+            "src_rank": 9816,
+            "source": "ranked-sum.lua",
+            "dest_rank": 7034,
+            "since": 0
+        }
+    }
+}
+{
+    "app_proto": "tls",
+    "src_port": 26192,
+    "event_type": "flow",
+    "proto": "TCP",
+    "flow_id": 1.216173160449e+15,
+    "src_ip": "71.219.178.155",
+    "timestamp": "2018-11-05T10:31:09.021346-0500",
+    "dest_port": 443,
+    "tcp": {
+        "tcp_flags_ts": "db",
+        "tcp_flags": "db",
+        "ecn": true,
+        "syn": true,
+        "cwr": true,
+        "ack": true,
+        "state": "closed",
+        "fin": true,
+        "tcp_flags_tc": "5b",
+        "psh": true
+    },
+    "flow": {
+        "alerted": false,
+        "bytes_toserver": 3755,
+        "pkts_toclient": 14,
+        "reason": "timeout",
+        "pkts_toserver": 18,
+        "start": "2018-11-05T10:26:46.312346-0500",
+        "state": "closed",
+        "age": 141,
+        "end": "2018-11-05T10:29:07.968286-0500",
+        "bytes_toclient": 8213
+    },
+    "dest_ip": "40.97.170.162",
+    "analytics": {
+        "bytes_mad": {
+            "deviation": 11658.15,
+            "source": "example-outlier.lua",
+            "n": 257693,
+            "median": 309.85,
+            "median_deviation": 149.7,
+            "since": 0,
+            "multiple": 77.876753507014
+        },
+        "unique_src": {
+            "count": 1,
+            "source": "connection_count",
+            "since": 0
+        },
+        "bytes_rank": {
+            "src_total": "23503570149",
+            "dest_total": "5716690",
+            "src_rank": 9816,
+            "source": "ranked-sum.lua",
+            "dest_rank": 6729,
+            "since": 0
+        }
+    }
+}
+{
+    "app_proto": "dns",
+    "src_port": 31488,
+    "event_type": "flow",
+    "proto": "UDP",
+    "flow_id": 4.1074008842768e+14,
+    "src_ip": "71.219.178.155",
+    "dest_port": 53,
+    "timestamp": "2018-11-05T10:31:09.021464-0500",
+    "flow": {
+        "alerted": false,
+        "bytes_toserver": 82,
+        "pkts_toclient": 1,
+        "reason": "timeout",
+        "pkts_toserver": 1,
+        "start": "2018-11-05T10:26:08.119970-0500",
+        "state": "established",
+        "age": 0,
+        "end": "2018-11-05T10:26:08.145158-0500",
+        "bytes_toclient": 126
+    },
+    "dest_ip": "104.248.58.8",
+    "analytics": {
+        "bytes_mad": {
+            "deviation": 101.9,
+            "source": "example-outlier.lua",
+            "n": 257694,
+            "median": 309.9,
+            "median_deviation": 149.75,
+            "since": 0,
+            "multiple": 0.6804674457429
+        },
+        "unique_src": {
+            "count": 1,
+            "source": "connection_count",
+            "since": 0
+        },
+        "bytes_rank": {
+            "src_total": "23503570231",
+            "dest_total": "29493209",
+            "src_rank": 9816,
+            "source": "ranked-sum.lua",
+            "dest_rank": 7034,
+            "since": 0
+        }
+    }
+}
+
+********
+{
+    "timestamp": "2018-11-05T10:32:00.012571-0500",
+    "flow_id": 2030922032556380,
+    "event_type": "flow",
+    "src_ip": "71.219.178.155",
+    "src_port": 6007,
+    "dest_ip": "69.164.202.202",
+    "dest_port": 123,
+    "proto": "UDP",
+    "app_proto": "failed",
+    "flow": {
+        "pkts_toserver": 1,
+        "pkts_toclient": 0,
+        "bytes_toserver": 90,
+        "bytes_toclient": 0,
+        "start": "2018-11-05T10:31:29.600412-0500",
+        "end": "2018-11-05T10:31:29.600412-0500",
+        "age": 0,
+        "state": "new",
+        "reason": "timeout",
+        "alerted": false
+    }
+}
+{
+    "timestamp": "2018-11-05T10:32:00.012663-0500",
+    "flow_id": 492391724752577,
+    "event_type": "flow",
+    "src_ip": "71.219.178.155",
+    "src_port": 47567,
+    "dest_ip": "13.91.131.250",
+    "dest_port": 443,
+    "proto": "TCP",
+    "app_proto": "tls",
+    "flow": {
+        "pkts_toserver": 18,
+        "pkts_toclient": 14,
+        "bytes_toserver": 2463,
+        "bytes_toclient": 6545,
+        "start": "2018-11-05T10:29:28.138945-0500",
+        "end": "2018-11-05T10:29:59.237474-0500",
+        "age": 31,
+        "state": "closed",
+        "reason": "timeout",
+        "alerted": false
+    },
+    "tcp": {
+        "tcp_flags": "1f",
+        "tcp_flags_ts": "1f",
+        "tcp_flags_tc": "1f",
+        "syn": true,
+        "fin": true,
+        "rst": true,
+        "psh": true,
+        "ack": true,
+        "state": "closed"
+    }
+}
+{
+    "timestamp": "2018-11-05T10:32:00.012779-0500",
+    "flow_id": 934799116301533,
+    "event_type": "flow",
+    "src_ip": "71.219.178.155",
+    "src_port": 43862,
+    "dest_ip": "104.248.58.8",
+    "dest_port": 53,
+    "proto": "UDP",
+    "app_proto": "dns",
+    "flow": {
+        "pkts_toserver": 1,
+        "pkts_toclient": 1,
+        "bytes_toserver": 90,
+        "bytes_toclient": 106,
+        "start": "2018-11-05T10:26:59.357597-0500",
+        "end": "2018-11-05T10:26:59.381226-0500",
+        "age": 0,
+        "state": "established",
+        "reason": "timeout",
+        "alerted": false
+    }
+}
+{
+    "timestamp": "2018-11-05T10:32:03.009791-0500",
+    "flow_id": 20819330363458,
+    "event_type": "flow",
+    "src_ip": "71.219.178.155",
+    "src_port": 62269,
+    "dest_ip": "104.248.58.8",
+    "dest_port": 53,
+    "proto": "UDP",
+    "app_proto": "dns",
+    "flow": {
+        "pkts_toserver": 2,
+        "pkts_toclient": 2,
+        "bytes_toserver": 162,
+        "bytes_toclient": 289,
+        "start": "2018-11-05T10:24:58.094274-0500",
+        "end": "2018-11-05T10:27:01.628930-0500",
+        "age": 123,
+        "state": "established",
+        "reason": "timeout",
+        "alerted": false
+    }
+}
+{
+    "timestamp": "2018-11-05T10:32:03.009956-0500",
+    "flow_id": 1748278807212018,
+    "event_type": "flow",
+    "src_ip": "71.219.178.155",
+    "src_port": 12564,
+    "dest_ip": "104.248.58.8",
+    "dest_port": 53,
+    "proto": "UDP",
+    "app_proto": "dns",
+    "flow": {
+        "pkts_toserver": 1,
+        "pkts_toclient": 1,
+        "bytes_toserver": 75,
+        "bytes_toclient": 168,
+        "start": "2018-11-05T10:27:01.372722-0500",
+        "end": "2018-11-05T10:27:01.397743-0500",
+        "age": 0,
+        "state": "established",
+        "reason": "timeout",
+        "alerted": false
+    }
+}
+{
+    "timestamp": "2018-11-05T10:32:04.062106-0500",
+    "flow_id": 2137516660916088,
+    "event_type": "flow",
+    "src_ip": "71.219.178.155",
+    "src_port": 68,
+    "dest_ip": "75.160.89.2",
+    "dest_port": 67,
+    "proto": "UDP",
+    "app_proto": "failed",
+    "flow": {
+        "pkts_toserver": 1,
+        "pkts_toclient": 1,
+        "bytes_toserver": 342,
+        "bytes_toclient": 330,
+        "start": "2018-11-05T10:27:02.556920-0500",
+        "end": "2018-11-05T10:27:02.813418-0500",
+        "age": 0,
+        "state": "established",
+        "reason": "timeout",
+        "alerted": false
+    }
+}
+{
+    "timestamp": "2018-11-05T10:32:04.062298-0500",
+    "flow_id": 1573097828771674,
+    "event_type": "flow",
+    "src_ip": "71.219.178.155",
+    "src_port": 1936,
+    "dest_ip": "104.248.58.8",
+    "dest_port": 53,
+    "proto": "UDP",
+    "app_proto": "dns",
+    "flow": {
+        "pkts_toserver": 1,
+        "pkts_toclient": 1,
+        "bytes_toserver": 90,
+        "bytes_toclient": 106,
+        "start": "2018-11-05T10:27:03.583514-0500",
+        "end": "2018-11-05T10:27:03.607484-0500",
+        "age": 0,
+        "state": "established",
+        "reason": "timeout",
+        "alerted": false
+    }
+}

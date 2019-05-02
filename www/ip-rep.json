@@ -1,0 +1,9 @@
+{
+    "id": "ip-rep",
+    "version": "1.0.0",
+    "name": "IP Blacklist",
+    "description": "Total Bytes Rank tracks the total bytes received for both source and destination IPs based and keeps a ranked list of top source and destination IPs.  Both the total bytes and rank are updated continuously and included on each flow.",
+    "features": {
+        "ip_rep": "Contains the name of the blacklist which contains the current IP, NONE if not on any blacklist"
+    }
+}

@@ -1,0 +1,13 @@
+{
+    "id": "triage",
+    "version": "1.0.0",
+    "name":"Alert Triage",
+    "description":"Alert Triage is a dynamic, data-driven weighting algorithm for prioritizing alerts.  This algorithm considers several factors including the frequency of the alert, the number of internal machines that have triggered the alert, and the overall number of alerts on each machine.  Rare alerts that appear on only a few machines are given the highest weight.  Frequent alerts that appear on many machines are given the lowest weight. Alert triage works similarly to the TF-IDF weighting used widely in text analytics.",
+    "features":{
+            "priority":"The fully-weighted score used for triage.",
+            "alert_count":"Number of times this alert has appeared on this destination_ip.",
+            "alerts_per_target":"Total number of alerts of all types on this destination_ip",
+            "unique_targets":"Number of destination_ip that have fired this alert",
+            "active_network_hosts":"Total number of hosts that are being monitored"
+    }
+}

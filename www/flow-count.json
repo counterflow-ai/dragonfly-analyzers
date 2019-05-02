@@ -1,0 +1,11 @@
+{
+    "id": "flow-count",
+    "version": "1.0.0",
+    "name": "Connection Count HyperLogLog",
+    "description": "Connection Count tracks the number of unique destination IP addresses connected to by each source IP.  This analyzer uses a specialized data structure called the HyperLogLog to efficiently store the distinct IP addresses.  HyperLogLog is a type of “sketch” algorithm which uses probabilistic hashing to minimize the space required to store large sets.",
+    "features": {
+        "since": "last time the counter was reset",
+        "count": "The count of unique IP addresses connected to",
+        "source": "Unique script identification"
+    }
+}

@@ -1,0 +1,10 @@
+{
+    "id": "priority",
+    "version": "1.0.0",
+    "name": "Overall Priority",
+    "description": "Combines anomaly scores on alerts to generate a single anomaly score",
+    "features": {
+        "priority":"Combined priority score",
+        "details":"Array of subscores from each component"
+    }
+}
